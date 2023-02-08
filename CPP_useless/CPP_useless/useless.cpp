@@ -61,3 +61,36 @@ Useless::Useless(Useless&& f) :n(f.n)
 	f.n = 0;
 	ShowObject();
 }
+Useless::~Useless()
+{
+	cout << "소멸자 호출; 남은객체: " << --ct << endl;
+	cout << "삭제된 객체:\n";
+	ShowObject();
+	delete[]pc;
+}
+Useless Useless::operator+(const Useless& f)const
+{
+	cout << "연산자 +() 진입\n";
+	Useless temp = Useless(n + f.n);
+	for (int i = 0; i < n; i++)
+		temp.pc[i] = pc[i];
+	for (int i = n; i < temp.n; i++)
+		temp.pc[i] = f.pc[i - n];
+	cout << "임시 객체:\n";
+	cout << "연사낮 +() 나옴\n";
+	return temp;
+}
+void Useless::ShowObject() const
+{
+	cout << "매개변수 수: " << n;
+	cout << "데이터 주소: " << (void*)pc << endl;
+}
+void Useless::ShowData() const
+{
+	if (n == 0)
+		cout << "(객체없음)";
+	else
+		for (int i = 0; i < n; i++)
+	cout << pc[i];
+	cout << endl;
+}
