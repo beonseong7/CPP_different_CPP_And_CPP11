@@ -94,3 +94,20 @@ void Useless::ShowData() const
 	cout << pc[i];
 	cout << endl;
 }
+int main()
+{
+	{
+		Useless one(10, 'x');
+		Useless two = one;
+		Useless three(20, 'o');
+		Useless four(one + three);
+		cout << "按眉 one: ";
+		one.ShowData();
+		cout << "按眉 two: ";
+		two.ShowData();
+		cout << "按眉 three: ";
+		three.ShowData();
+		cout << "按眉 four:";
+		four.ShowData();
+	}
+}
