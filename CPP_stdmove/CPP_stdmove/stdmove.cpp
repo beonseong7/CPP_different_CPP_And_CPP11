@@ -32,3 +32,40 @@ Useless::Useless(int k) : n(k)
 	++ct;
 	pc = new char[n];
 }
+Useless::Useless(int k, char ch) : n(k)
+{
+	++ct;
+	pc = new char[n];
+	for (int i = 0; i < n; i ++ )
+		pc[i] = ch;
+}
+Useless::Useless(const Useless& f) : n(f.n)
+{
+	++ct;
+	pc = new char[n];
+	for (int i = 0; i < n; i++)
+		pc[i] = f.pc[i];
+}
+Useless::Useless(Useless&& f) :n(f.n)
+{
+	++ct;
+	pc = f.pc;
+	f.pc = nullptr;
+	f.n = 0;
+}
+Useless::~Useless()
+{
+	delete[]pc;
+}
+Useless& Useless::operator=(const Useless& f)
+{
+	std::cout << "복사 대입 연산자 호출:\n";
+	if (this == &f)
+		return *this;
+	delete[] pc;
+	n = f.n;
+	pc = new char[n];
+	for (int i = 0; i < n; i++)
+		pc[i] = f.pc[i];
+	return *this;
+}
