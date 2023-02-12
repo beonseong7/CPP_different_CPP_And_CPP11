@@ -69,3 +69,38 @@ Useless& Useless::operator=(const Useless& f)
 		pc[i] = f.pc[i];
 	return *this;
 }
+Useless& Useless::operator=(Useless&& f)
+{
+	std::cout << "이동 대입 연산자 호출:\n";
+	if (this == &f)
+		return *this;
+	delete[]pc;
+	n = f.n;
+	pc = f.pc;
+	f.n = 0;
+	f.pc = nullptr;
+	return *this;
+}
+Useless Useless::operator+(const Useless& f)const
+{
+	Useless temp = Useless(n + f.n);
+	for (int i = 0; i < n; i++)
+		temp.pc[i] = pc[i];
+	for (int i = n; i < temp.n; i++)
+		temp.pc[i] = f.pc[i - n];
+	return temp;
+}
+void Useless::ShowObject() const
+{
+	std::cout << "매개변수 수: " << n;
+	std::cout << "데이터 주소: " << (void*)pc << std::endl;
+}
+void Useless::ShowData() const
+{
+	if (n == 0)
+		std::cout << "(객체 없음)";
+	else
+		for (int i = 0; i < n; i++)
+			std::cout << pc[i];
+	std::cout << std::endl;
+}
