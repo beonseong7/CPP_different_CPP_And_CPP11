@@ -104,3 +104,32 @@ void Useless::ShowData() const
 			std::cout << pc[i];
 	std::cout << std::endl;
 }
+int main()
+{
+	using std::cout;
+	{
+		Useless one(10, 'x');
+		Useless two =one + one;
+		cout << "°´Ã¼ one: ";
+		one.ShowData();
+		cout << "°´Ã¼ two:";
+		two.ShowData();
+		Useless three, four;
+		cout << "three = one\n";
+		three = one;
+		cout << "ÇöÀç °´Ã¼ three = ";
+		three.ShowData();
+		cout << "±×¸®°í °´Ã¼ one = ";
+		one.ShowData();
+		cout << "four = one + two\n";
+		four = one + two;
+		cout << "ÇöÀç °´Ã¼ four = ";
+		four.ShowData();
+		cout << "four = move(one)\n";
+		four = std::move(one);
+		cout << "ÇöÀç °´Ã¼ four = ";
+		four.ShowData();
+		cout << "±×¸®°í °´Ã¼ one =";
+		one.ShowData();
+	}
+}
